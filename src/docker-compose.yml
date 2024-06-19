@@ -1,14 +1,13 @@
-version: '3.7'
 services:
-  nginx:
+  my_nginx:
     container_name: my_nginx
     depends_on:
-      - wordpress
+      - my_wordpress
     build: #Builds the image from the Dockerfile
       context: ./requirements/nginx/
       args:
         - DOMAIN_NAME=${DOMAIN_NAME}
-    image: nginx #assigns the image name
+    #image: nginx #assigns the image name
     ports:
       - 443:443
     restart: unless-stopped #restarts the container in case of crash
@@ -17,9 +16,9 @@ services:
     networks:
       - inception
     env_file:
-      - credentials.env
+      - .env
 
-  mariadb:
+  my_mariadb:
     container_name: my_mariadb
     build: #Builds the image from the Dockerfile
       context: requirements/mariadb/
@@ -28,7 +27,7 @@ services:
         - DB_USER=${DB_USER}
         - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
         - DB_PASSWORD=${DB_PASSWORD}
-    image: mariadb #assigns the image name
+    #image: mariadb #assigns the image name
     ports:
       - 3306:3306
     restart: unless-stopped #restarts the container in case of crash
@@ -37,12 +36,12 @@ services:
     networks:
       - inception
     env_file:
-      - credentials.env
+      - .env
 
-  wordpress:
+  my_wordpress:
     container_name: my_wordpress
     depends_on:
-      - mariadb
+      - my_mariadb
     build: #Builds the image from the Dockerfile
       context: requirements/wordpress/
       args:
@@ -54,7 +53,7 @@ services:
         - WP_USER=${WP_USER}
         - WP_USER_PASSWORD=${WP_USER_PASSWORD}
         - WP_USER_EMAIL=${WP_USER_EMAIL}
-    image: wordpress #assigns the image name
+    #image: wordpress #assigns the image name
     ports:
       - 9000:9000
     restart: unless-stopped #restarts the container in case of crash
@@ -63,7 +62,7 @@ services:
     networks:
       - inception
     env_file:
-      - credentials.env
+      - .env
 
 volumes:
   wordpress:
@@ -84,7 +83,7 @@ volumes:
 
 networks:
   inception:
-    driver: default
+    driver: bridge
 
 #secrets:
 #  db_root_password:

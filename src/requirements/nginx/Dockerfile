@@ -5,7 +5,7 @@ FROM debian:bullseye
 EXPOSE 443
 
 # Install the nginx package and prerequisites && clean up the apt cache and remove the package lists(reduces the image size).
-RUN apt-get update && apt-get install -y nginx openssl \
+RUN apt-get update && apt-get install -y nginx openssl iputils-ping \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 

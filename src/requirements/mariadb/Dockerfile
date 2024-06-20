@@ -5,7 +5,7 @@ FROM debian:bullseye
 EXPOSE 3306
 
 # Install MariaDB
-RUN apt-get update && apt-get install -y --no-install-recommends --no-install-suggests mariadb-server \
+RUN apt-get update && apt-get install -y --no-install-recommends --no-install-suggests mariadb-server iputils-ping \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 

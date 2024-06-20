@@ -1,7 +1,7 @@
 all: up
 
 up:
-	@docker-compose -f src/docker-compose.yml up -d
+	@docker-compose -f src/docker-compose.yml up -d --build
 
 down:
 	@docker-compose -f src/docker-compose.yml down
@@ -12,12 +12,12 @@ prune:
 re: down prune up
 
 nginx:
-	@docker-compose -f src/docker-compose.yml up my_nginx -d
+	@docker-compose -f src/docker-compose.yml up nginx -d --build
 
 mariadb:
-	@docker-compose -f src/docker-compose.yml up my_mariadb -d --build
+	@docker-compose -f src/docker-compose.yml up mariadb -d --build
 
 wordpress:
-	@docker-compose -f src/docker-compose.yml up my_wordpress -d
+	@docker-compose -f src/docker-compose.yml up wordpress -d --build
 
 PHONY: up down prune re nginx mariadb wordpress

@@ -1,13 +1,13 @@
 services:
-  my_nginx:
+  nginx:
     container_name: my_nginx
     depends_on:
-      - my_wordpress
+      - wordpress
     build: #Builds the image from the Dockerfile
       context: ./requirements/nginx/
       args:
         - DOMAIN_NAME=${DOMAIN_NAME}
-    #image: nginx #assigns the image name
+    image: nginx #assigns the image name
     ports:
       - 443:443
     restart: unless-stopped #restarts the container in case of crash
@@ -18,7 +18,7 @@ services:
     env_file:
       - .env
 
-  my_mariadb:
+  mariadb:
     container_name: my_mariadb
     build: #Builds the image from the Dockerfile
       context: requirements/mariadb/
@@ -27,7 +27,7 @@ services:
         - DB_USER=${DB_USER}
         - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
         - DB_PASSWORD=${DB_PASSWORD}
-    #image: mariadb #assigns the image name
+    image: mariadb #assigns the image name
     ports:
       - 3306:3306
     restart: unless-stopped #restarts the container in case of crash
@@ -38,10 +38,10 @@ services:
     env_file:
       - .env
 
-  my_wordpress:
+  wordpress:
     container_name: my_wordpress
     depends_on:
-      - my_mariadb
+      - mariadb
     build: #Builds the image from the Dockerfile
       context: requirements/wordpress/
       args:
@@ -53,7 +53,7 @@ services:
         - WP_USER=${WP_USER}
         - WP_USER_PASSWORD=${WP_USER_PASSWORD}
         - WP_USER_EMAIL=${WP_USER_EMAIL}
-    #image: wordpress #assigns the image name
+    image: wordpress #assigns the image name
     ports:
       - 9000:9000
     restart: unless-stopped #restarts the container in case of crash

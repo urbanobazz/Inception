@@ -1,18 +1,17 @@
 #!/bin/bash
-set -e
+ set -e
 
 cd /var/www/html
 
 #Check if wordpress is installed
-if ! wp core is-installed --allow-root; then
-	echo "Downloading Wordpress..."
-	wp core download --allow-root
-else
+if [ -d "wp-admin" ]; then
 	echo "Wordpress already installed"
+else
+	wp core download --allow-root
 fi
 
 #Check if wp-config.php exists
-if [! -f wp-config.php]; then
+if [ ! -f "wp-config.php" ]; then
 	echo "Creating wp-config.php..."
 	wp config create \
 	--dbname=${DB_NAME} \
@@ -43,4 +42,4 @@ if [ ! -d /run/php ]; then
 	mkdir /run/php
 fi
 
-exec $@
+/usr/sbin/php-fpm7.4 -F

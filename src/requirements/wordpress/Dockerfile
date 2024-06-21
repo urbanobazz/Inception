@@ -14,10 +14,12 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 	&& chmod +x wp-cli.phar \
 	&& mv wp-cli.phar /usr/local/bin/wp
 
-RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
+# RUN chown -R www-data:www-data /var/www/html
 
 COPY conf/wd-setup.sh /usr/local/bin
-RUN pwd && chmod +x /usr/local/bin/wd-setup.sh && /usr/local/bin/wd-setup.sh
+RUN pwd && chmod +x /usr/local/bin/wd-setup.sh
 
-CMD ["php-fpm7.4", "-F"]
+# /usr/local/bin/wd-setup.sh
+
+ENTRYPOINT ["bash", "/usr/local/bin/wd-setup.sh"]
 

@@ -59,7 +59,7 @@ services:
     image: wordpress #assigns the image name
     ports:
       - 9000:9000
-    # restart: unless-stopped #restarts the container in case of crash
+    restart: unless-stopped #restarts the container in case of crash
     volumes:
       - wordpress:/var/www/html
     networks:

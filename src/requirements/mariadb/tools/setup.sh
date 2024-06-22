@@ -15,8 +15,10 @@
 
 set -e
 
+echo "Starting MariaDB..."
 service mariadb start
 
+echo "Creating database..."
 mariadb -v -u root << EOF
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
 CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
@@ -27,6 +29,8 @@ EOF
 
 sleep 5
 
+echo "Stopping MariaDB..."
 service mariadb stop
 
+echo "Starting MariaDB again..."
 exec $@

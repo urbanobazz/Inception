@@ -1,6 +1,6 @@
 [mysqld]
 
-user                    = mysql
+user                    = root
 pid-file                = /run/mysqld/mysqld.pid
 socket                  = /run/mysqld/mysqld.sock
 port                    = 3306

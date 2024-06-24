@@ -27,9 +27,10 @@ volumes:
 	@mkdir -p /home/ubazzane/data/mariadb
 
 volume-down:
+	@docker volume rm wordpress-volume
+	@docker volume rm mariadb-volume
 	#@rm -rf /Users/urbanojr/Documents/inception-data/wordpress #MacOS
 	#@rm -rf /Users/urbanojr/Documents/inception-data/mariadb #MacOS
-	@rm -rf /home/ubazzane/data/wordpress.
-	@rm -rf /home/ubazzane/data/mariadb
+
 
 PHONY: up down prune re nginx mariadb wordpress volumes volume-down

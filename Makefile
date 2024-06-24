@@ -21,8 +21,8 @@ wordpress:
 	@docker-compose -f src/docker-compose.yml up wordpress -d --build
 
 volumes:
-	@mkdir /Users/urbanojr/Documents/inception-data/wordpress
-	@mkdir /Users/urbanojr/Documents/inception-data/mariadb
+	@mkdir -p /Users/urbanojr/Documents/inception-data/wordpress
+	@mkdir -p /Users/urbanojr/Documents/inception-data/mariadb
 
 volume-down:
 	@rm -rf /Users/urbanojr/Documents/inception-data/wordpress

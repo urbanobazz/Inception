@@ -73,7 +73,8 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/urbanojr/Documents/inception-data/wordpress #TO-DO: change to linux path
+      #device: /Users/urbanojr/Documents/inception-data/wordpress #MacOS
+      device: /home/ubazzane/data
       o: bind
 
   mariadb:
@@ -81,7 +82,8 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/urbanojr/Documents/inception-data/mariadb #TO-DO: change to linux path
+      #device: /Users/urbanojr/Documents/inception-data/mariadb #MacOS
+      device: /home/ubazzane/data
       o: bind
 
 networks:

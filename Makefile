@@ -4,7 +4,13 @@ up: volumes
 	@docker-compose -f src/docker-compose.yml up -d --build
 
 down:
-	@docker-compose -f src/docker-compose.yml down
+	@docker-compose -f src/docker-compose.yml down --volume
+
+stop:
+	@docker-compose -f src/docker-compose.yml stop
+
+start:
+	@docker-compose -f src/docker-compose.yml start
 
 prune: down volume-down
 	@docker system prune -af
@@ -27,8 +33,8 @@ volumes:
 	@mkdir -p /home/ubazzane/data/mariadb
 
 volume-down:
-	@docker volume rm wordpress-volume
-	@docker volume rm mariadb-volume
+	#@docker volume rm wordpress-volume
+	#@docker volume rm mariadb-volume
 	#@rm -rf /Users/urbanojr/Documents/inception-data/wordpress #MacOS
 	#@rm -rf /Users/urbanojr/Documents/inception-data/mariadb #MacOS
 
